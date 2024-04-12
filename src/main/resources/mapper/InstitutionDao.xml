@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.InstitutionDao">
+
+    <select id="findInstitution" parameterType="map" resultMap="findInstitutionMap">
+        SELECT DISTINCT i.*, (SELECT collectId FROM collect WHERE institutionId = I.institutionId AND userId = #{userId}) AS collectId, (SELECT collectFlag FROM collect WHERE institutionId = I.institutionId AND userId = #{userId}) AS collectFlag
+          FROM institution i
+          LEFT JOIN collegeMajor c ON i.institutionId = c.institutionId
+        <where>
+            <if test="institutionName != null and institutionName != ''">
+                institutionName Like '%${institutionName}%'
+            </if>
+            <if test="collegeMajor != null and collegeMajor != ''">
+                AND c.collegeMajor = #{collegeMajor}
+            </if>
+        </where>
+        ORDER BY i.institutionRanking
+    </select>
+
+    <resultMap id="findInstitutionMap" type="institutionEntity">
+        <id property="institutionId" column="institutionId"></id>
+        <result property="institutionRanking" column="institutionRanking"></result>
+        <result property="institutionName" column="institutionName"></result>
+        <result property="institutionPicture" column="institutionPicture"></result>
+        <result property="institutionUrl" column="institutionUrl"></result>
+        <result property="institutionAddress" column="institutionAddress"></result>
+        <association property="collectEntity" javaType="collectEntity">
+            <id property="collectId" column="collectId"></id>
+            <result property="collectFlag" column="collectFlag"></result>
+        </association>
+    </resultMap>
+
+    <select id="findCollegeMajor" resultType="institutionEntity">
+        SELECT DISTINCT c.collegeMajor
+          FROM collegeMajor c
+    </select>
+
+    <select id="findYonghuByCounselor" resultType="yonghuEntity">
+        SELECT *
+          FROM yonghu
+         WHERE counselor = 0
+    </select>
+
+    <select id="findCounselorUserEntityByUserId" parameterType="map" resultType="counselorUserEntity">
+        SELECT *
+          FROM counseloruser
+         WHERE userId = #{userId}
+    </select>
+
+    <insert id="addCounselorUser" parameterType="map">
+        INSERT INTO counseloruser(counselorid, userid) VALUES(#{counselorid}, #{userId})
+    </insert>
+
+    <insert id="addApplyfor" parameterType="map">
+        INSERT INTO applyfor(userId, institutionId, schedule) VALUES(#{userId}, #{institutionId}, #{schedule})
+    </insert>
+
+    <select id="findApplyForById" parameterType="map" resultType="applyForEntity">
+        SELECT *
+          FROM applyfor
+         WHERE userId = #{userId}
+           AND institutionId = #{institutionId}
+    </select>
+
+    <select id="findApplyForManage" parameterType="map" resultMap="findApplyForManageMap">
+        SELECT i.*, af.schedule
+          FROM institution i
+          LEFT JOIN applyfor af ON i.institutionId = af.applyforid
+         WHERE af.userId = #{userId}
+    </select>
+
+    <resultMap id="findApplyForManageMap" type="institutionEntity">
+        <id property="institutionId" column="institutionId"></id>
+        <result property="institutionRanking" column="institutionRanking"></result>
+        <result property="institutionName" column="institutionName"></result>
+        <result property="institutionPicture" column="institutionPicture"></result>
+        <result property="institutionUrl" column="institutionUrl"></result>
+        <result property="institutionAddress" column="institutionAddress"></result>
+        <association property="applyForEntity" javaType="applyForEntity">
+            <result property="schedule" column="schedule"></result>
+        </association>
+    </resultMap>
+
+    <select id="findApplyForManageByCounselor" parameterType="map" resultMap="findApplyForManageByCounselorMap">
+        SELECT i.*, af.applyforid, af.schedule, y.xingming, y.undergraduateinstitution, y.divideequally, y.ieltsscore
+          FROM institution i
+          LEFT JOIN applyfor af ON i.institutionId = af.applyforid
+          LEFT JOIN counseloruser c ON af.userId = c.userid
+          LEFT JOIN yonghu y ON c.userid = y.id
+         WHERE c.counselorid = #{counselorid}
+        <if test="xingming != null and xingming != ''">
+            AND y.xingming LIKE '%${xingming}%'
+        </if>
+        <if test="institutionName != null and institutionName != ''">
+            AND i.institutionName LIKE '%${institutionName}%'
+        </if>
+    </select>
+
+    <resultMap id="findApplyForManageByCounselorMap" type="institutionEntity">
+        <id property="institutionId" column="institutionId"></id>
+        <result property="institutionRanking" column="institutionRanking"></result>
+        <result property="institutionName" column="institutionName"></result>
+        <result property="institutionPicture" column="institutionPicture"></result>
+        <result property="institutionUrl" column="institutionUrl"></result>
+        <result property="institutionAddress" column="institutionAddress"></result>
+        <association property="applyForEntity" javaType="applyForEntity">
+            <id property="applyforid" column="applyforid"></id>
+            <result property="schedule" column="schedule"></result>
+        </association>
+        <association property="yonghuEntity" javaType="yonghuEntity">
+            <result property="xingming" column="xingming"></result>
+            <result property="undergraduateinstitution" column="undergraduateinstitution"></result>
+            <result property="divideequally" column="divideequally"></result>
+            <result property="ieltsscore" column="ieltsscore"></result>
+        </association>
+    </resultMap>
+
+    <update id="updateSchedule" parameterType="map">
+        UPDATE applyfor
+           SET schedule = #{schedule}
+         WHERE applyforid = #{applyforid}
+    </update>
+
+    <select id="findCollectById" parameterType="map" resultType="collectEntity">
+        SELECT *
+          FROM collect
+         WHERE institutionId = #{institutionId}
+           AND userId = #{userId}
+    </select>
+
+    <insert id="addCollect" parameterType="map">
+        INSERT INTO collect(institutionId, userId, collectFlag) VALUES(#{institutionId}, #{userId}, #{collectFlag})
+    </insert>
+
+    <update id="updateCollect" parameterType="map">
+        UPDATE collect
+           SET collectFlag = #{collectFlag}
+         WHERE institutionId = #{institutionId}
+           AND userId = #{userId}
+    </update>
+
+    <select id="findMyCollection" parameterType="map" resultType="institutionEntity">
+        SELECT DISTINCT i.*
+          FROM institution i
+          LEFT JOIN collegeMajor c ON i.institutionId = c.institutionId
+          LEFT JOIN collect ct ON i.institutionId = ct.institutionId
+         WHERE ct.userId = #{userId}
+           AND ct.collectFlag = 1
+    </select>
+</mapper>

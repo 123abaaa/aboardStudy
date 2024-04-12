@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.RelevantInformationDao">
+
+    <select id="findRelevantInformation" parameterType="map" resultType="relevantInformationEntity">
+        SELECT ri.relevantInformationId,
+               ri.relevantInformationPicture,
+               ri.relevantInformationTitle,
+               ri.relevantInformationContent,
+               DATE_FORMAT(ri.releaseTime,'%Y-%m-%d %H:%i:%s') AS releaseTime
+        FROM relevantInformation ri
+        <where>
+            <if test="biaoti != null and biaoti != ''">
+                relevantInformationTitle LIKE '%${biaoti}%'
+            </if>
+        </where>
+    </select>
+
+    <insert id="addDetails" parameterType="map">
+        INSERT INTO relevantInformation(relevantInformationPicture, relevantInformationTitle, relevantInformationContent, releaseTime)
+        VALUES(#{relevantInformationPicture}, #{relevantInformationTitle}, #{relevantInformationContent}, NOW())
+    </insert>
+
+    <update id="updateDetails" parameterType="map">
+        UPDATE relevantInformation
+           SET relevantInformationPicture = #{relevantInformationPicture},
+               relevantInformationTitle = #{relevantInformationTitle},
+               relevantInformationContent = #{relevantInformationContent}
+         WHERE relevantInformationId = #{relevantInformationId}
+    </update>
+
+    <delete id="deleteDetails" parameterType="map">
+        DELETE FROM relevantInformation WHERE relevantInformationId = #{relevantInformationId}
+    </delete>
+</mapper>
