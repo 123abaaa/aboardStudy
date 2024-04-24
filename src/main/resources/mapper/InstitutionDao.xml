@@ -6,7 +6,7 @@
     <select id="findInstitution" parameterType="map" resultMap="findInstitutionMap">
         SELECT DISTINCT i.*, (SELECT collectId FROM collect WHERE institutionId = I.institutionId AND userId = #{userId}) AS collectId, (SELECT collectFlag FROM collect WHERE institutionId = I.institutionId AND userId = #{userId}) AS collectFlag
           FROM institution i
-          LEFT JOIN collegeMajor c ON i.institutionId = c.institutionId
+          left JOIN collegeMajor c ON i.institutionId = c.institutionId
         <where>
             <if test="institutionName != null and institutionName != ''">
                 institutionName Like '%${institutionName}%'

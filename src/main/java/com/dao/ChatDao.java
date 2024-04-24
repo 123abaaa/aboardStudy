@@ -19,7 +19,7 @@ public interface ChatDao extends BaseMapper<ChatEntity> {
 	ChatVO selectVO(@Param("ew") Wrapper<ChatEntity> wrapper);
 	
 	List<ChatView> selectListView(@Param("ew") Wrapper<ChatEntity> wrapper);
-
+//
 	List<ChatView> selectListView(Pagination page,@Param("ew") Wrapper<ChatEntity> wrapper,@Param("map") Map<String, Object> params);
 	
 	ChatView selectView(@Param("ew") Wrapper<ChatEntity> wrapper);

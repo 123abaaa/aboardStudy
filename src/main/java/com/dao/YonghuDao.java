@@ -25,7 +25,7 @@ public interface YonghuDao extends BaseMapper<YonghuEntity> {
 	
 
     List<Map<String, Object>> selectValue(@Param("params") Map<String, Object> params,@Param("ew") Wrapper<YonghuEntity> wrapper);
-
+//
     List<Map<String, Object>> selectTimeStatValue(@Param("params") Map<String, Object> params,@Param("ew") Wrapper<YonghuEntity> wrapper);
 
     List<Map<String, Object>> selectGroup(@Param("params") Map<String, Object> params,@Param("ew") Wrapper<YonghuEntity> wrapper);

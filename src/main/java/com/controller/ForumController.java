@@ -55,7 +55,7 @@ public class ForumController {
 
         return R.ok().put("data", page);
     }
-    
+//
     @RequestMapping("/list")
     public R list(@RequestParam Map<String, Object> params,ForumEntity forum, 
 		HttpServletRequest request){

@@ -21,7 +21,7 @@ public interface NewsDao extends BaseMapper<NewsEntity> {
 	List<NewsView> selectListView(@Param("ew") Wrapper<NewsEntity> wrapper);
 
 	List<NewsView> selectListView(Pagination page,@Param("ew") Wrapper<NewsEntity> wrapper);
-	
+//
 	NewsView selectView(@Param("ew") Wrapper<NewsEntity> wrapper);
 	
 

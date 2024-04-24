@@ -56,7 +56,7 @@ public class YonghuController {
 		String token = tokenService.generateToken(u.getId(), username,"yonghu",  "user" );
 		return R.ok().put("token", token).put("YonghuEntity", u);
 	}
-
+//
     @IgnoreAuth
     @RequestMapping(value = "/front/login")
     public R frontLogin(String username, String password, String captcha, HttpServletRequest request) {

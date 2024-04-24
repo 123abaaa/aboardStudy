@@ -19,7 +19,7 @@ public interface NewsService extends IService<NewsEntity> {
    	NewsVO selectVO(@Param("ew") Wrapper<NewsEntity> wrapper);
    	
    	List<NewsView> selectListView(Wrapper<NewsEntity> wrapper);
-   	
+//
    	NewsView selectView(@Param("ew") Wrapper<NewsEntity> wrapper);
    	
    	PageUtils queryPage(Map<String, Object> params,Wrapper<NewsEntity> wrapper);

@@ -20,7 +20,7 @@ public interface ForumService extends IService<ForumEntity> {
    	ForumVO selectVO(@Param("ew") Wrapper<ForumEntity> wrapper);
    	
    	List<ForumView> selectListView(Wrapper<ForumEntity> wrapper);
-   	
+//
    	ForumView selectView(@Param("ew") Wrapper<ForumEntity> wrapper);
    	
    	PageUtils queryPage(Map<String, Object> params,Wrapper<ForumEntity> wrapper);

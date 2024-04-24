@@ -20,7 +20,7 @@ public interface ForumDao extends BaseMapper<ForumEntity> {
 	List<ForumView> selectListView(@Param("ew") Wrapper<ForumEntity> wrapper);
 
 	List<ForumView> selectListView(Pagination page,@Param("ew") Wrapper<ForumEntity> wrapper);
-	
+//
 	ForumView selectView(@Param("ew") Wrapper<ForumEntity> wrapper);
 	
 

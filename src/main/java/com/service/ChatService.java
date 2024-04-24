@@ -18,7 +18,7 @@ public interface ChatService extends IService<ChatEntity> {
    	List<ChatVO> selectListVO(Wrapper<ChatEntity> wrapper);
    	
    	ChatVO selectVO(@Param("ew") Wrapper<ChatEntity> wrapper);
-   	
+//
    	List<ChatView> selectListView(Wrapper<ChatEntity> wrapper);
    	
    	ChatView selectView(@Param("ew") Wrapper<ChatEntity> wrapper);
