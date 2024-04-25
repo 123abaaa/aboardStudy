@@ -19,7 +19,7 @@ public class TokenEntity implements Serializable {
 	private String username;
 	
 	private String tablename;
-	
+//
 	private String role;
 	
 	private String token;

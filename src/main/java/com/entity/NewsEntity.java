@@ -28,7 +28,7 @@ public class NewsEntity<T> implements Serializable {
 	public NewsEntity() {
 		
 	}
-	
+//
 	public NewsEntity(T t) {
 		try {
 			BeanUtils.copyProperties(this, t);

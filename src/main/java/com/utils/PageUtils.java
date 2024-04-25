@@ -20,7 +20,7 @@ public class PageUtils implements Serializable {
 
 	private List<?> list;
 	
-	public PageUtils(List<?> list, int totalCount, int pageSize, int currPage) {
+	public PageUtils(List<?> list, int totalCount) {
 		this.list = list;
 		this.total = totalCount;
 		this.pageSize = pageSize;

@@ -13,6 +13,6 @@ public interface RelevantInformationService extends IService<RelevantInformation
     int addDetails(Map<String, Object> params);
 
     int updateDetails(Map<String, Object> params);
-
+//
     int deleteDetails(Map<String, Object> params);
 }

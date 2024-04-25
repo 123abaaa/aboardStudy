@@ -7,15 +7,15 @@ public class CounselorUserEntity {
     private Long counselorid;
 
     private Long userid;
-
+//
     public Integer getCounseloruserid() {
         return counseloruserid;
     }
-
+//
     public void setCounseloruserid(Integer counseloruserid) {
         this.counseloruserid = counseloruserid;
     }
-
+//
     public Long getCounselorid() {
         return counselorid;
     }

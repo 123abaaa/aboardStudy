@@ -14,9 +14,9 @@ import com.utils.PageUtils;
 
 public interface UsersService extends IService<UsersEntity> {
  	PageUtils queryPage(Map<String, Object> params);
-    
+//
    	List<UsersEntity> selectListView(Wrapper<UsersEntity> wrapper);
-   	
+//
    	PageUtils queryPage(Map<String, Object> params,Wrapper<UsersEntity> wrapper);
 	   	
 }

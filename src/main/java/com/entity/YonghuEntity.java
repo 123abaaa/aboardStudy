@@ -37,7 +37,7 @@ public class YonghuEntity<T> implements Serializable {
 			e.printStackTrace();
 		}
 	}
-
+//
 	@TableId
 	private Long id;
 			

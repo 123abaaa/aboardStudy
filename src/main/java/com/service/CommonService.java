@@ -7,7 +7,7 @@ public interface CommonService {
 	List<String> getOption(Map<String, Object> params);
 	
 	Map<String, Object> getFollowByOption(Map<String, Object> params);
-	
+//
 	void sh(Map<String, Object> params);
 	
 	int remindCount(Map<String, Object> params);

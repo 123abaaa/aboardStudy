@@ -13,7 +13,7 @@ import com.entity.view.NewsView;
 
 
 public interface NewsDao extends BaseMapper<NewsEntity> {
-	
+//
 	List<NewsVO> selectListVO(@Param("ew") Wrapper<NewsEntity> wrapper);
 	
 	NewsVO selectVO(@Param("ew") Wrapper<NewsEntity> wrapper);

@@ -13,7 +13,7 @@ public interface InstitutionService extends IService<InstitutionEntity> {
     List<InstitutionEntity> findCollegeMajor();
 
     List<YonghuEntity> findYonghuByCounselor();
-
+//
     CounselorUserEntity findCounselorUserEntityByUserId(Map<String, Object> params);
 
     int addCounselorUser(Map<String, Object> params);

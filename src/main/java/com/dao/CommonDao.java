@@ -8,7 +8,7 @@ public interface CommonDao{
 	List<String> getOption(Map<String, Object> params);
 	
 	Map<String, Object> getFollowByOption(Map<String, Object> params);
-	
+//
 	List<String> getFollowByOption2(Map<String, Object> params);
 	
 	void sh(Map<String, Object> params);

@@ -5,7 +5,7 @@ public class ApplyForEntity {
     private Integer applyforid;
 
     private Long userId;
-
+//
     private Integer InstitutionId;
 
     private Integer schedule;
